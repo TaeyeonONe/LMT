@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>甜蜜时刻 - MY LOVE LMT</title>
+    <style>
+        /* 样式不变，无需修改 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '微软雅黑', Arial, sans-serif;
+        }
+        body {
+            background: linear-gradient(180deg, #fef7fb 0%, #f0f8fb 100%);
+            min-height: 100vh;
+            padding: 30px 0;
+            perspective: 1000px;
+        }
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header-title {
+            font-size: 28px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #7472FE 0%, #F472B6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 8px rgba(116, 114, 254, 0.15);
+        }
+        .back-btn {
+            padding: 12px 28px;
+            background: linear-gradient(135deg, #7472FE 0%, #9D65C9 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            box-shadow: 
+                0 8px 15px rgba(116, 114, 254, 0.2),
+                inset 0 2px 2px rgba(255,255,255,0.3),
+                inset 0 -2px 2px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            transform: translateY(0) rotateX(0);
+        }
+        .back-btn:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 
+                0 12px 20px rgba(116, 114, 254, 0.3),
+                inset 0 2px 2px rgba(255,255,255,0.3),
+                inset 0 -2px 2px rgba(0,0,0,0.1);
+        }
+        .back-btn:active {
+            transform: translateY(-2px) rotateX(2deg);
+            box-shadow: 
+                0 5px 10px rgba(116, 114, 254, 0.2),
+                inset 0 2px 2px rgba(255,255,255,0.2),
+                inset 0 -2px 2px rgba(0,0,0,0.15);
+        }
+        .page-title {
+            text-align: center;
+            font-size: clamp(1.8rem, 4vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, #5B5FEF 0%, #F472B6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 50px;
+            text-shadow: 0 4px 10px rgba(91, 95, 239, 0.1);
+        }
+        .moment-list {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        .moment-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 15px 30px rgba(116, 114, 254, 0.12),
+                0 5px 15px rgba(0,0,0,0.08),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+            transform: translateY(0) rotateY(0);
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        .moment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #7472FE, #F472B6);
+            z-index: 2;
+        }
+        .moment-card:hover {
+            transform: translateY(-10px) rotateY(3deg);
+            box-shadow: 
+                0 25px 40px rgba(116, 114, 254, 0.2),
+                0 10px 20px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+        .card-img-box {
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .moment-card:hover .card-img-box img {
+            transform: scale(1.05);
+        }
+        .card-img-box::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.2));
+            z-index: 1;
+        }
+        .card-content {
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #232340;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title::before {
+            content: '❤️';
+            font-size: 20px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .moment-card:hover .card-title::before {
+            transform: scale(1.1) rotate(10deg);
+        }
+        .card-desc {
+            font-size: 16px;
+            color: #6B7280;
+            line-height: 1.6;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .card-desc span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .card-desc span::before {
+            content: '📅';
+            font-size: 14px;
+        }
+        .card-desc span:nth-child(2)::before {
+            content: '📍';
+        }
+        @media (max-width: 768px) {
+            .card-img-box {
+                height: 300px;
+            }
+            .card-content {
+                padding: 20px;
+            }
+            .moment-card:hover {
+                transform: translateY(-8px) rotateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 改顶部小标题 -->
+    <div class="header">
+        <h1 class="header-title">我们的小美好</h1>
+        <!-- 2. 改返回按钮文字 -->
+        <button class="back-btn" onclick="window.location.href='index.html'">← 回到首页</button>
+    </div>
+
+    <!-- 3. 改页面大标题 -->
+    <h2 class="page-title">专属我们的甜蜜时光</h2>
+
+    <div class="moment-list">
+        <!-- 卡片1：改标题/时间/地点/碎碎念 -->
+        <div class="moment-card">
+            <div class="card-img-box">
+                <img src="./images/moment_1.jpg" alt="第一次AI">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">第一次AI</h3>
+                <div class="card-desc">
+                    <span>时间：2025.02.14</span>
+                    <span>地点：古城</span>
+                    <span>碎碎念：第一次牵手超紧张～</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片2：改标题/时间/地点/碎碎念 -->
+        <div class="moment-card">
+            <div class="card-img-box">
+                <img src="./images/moment_2.jpg" alt="比爱心">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">比爱心</h3>
+                <div class="card-desc">
+                    <span>时间：2025.05.20</span>
+                    <span>地点：HOME</span>
+                    <span>碎碎念：lmt是漂亮的～</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 卡片3：改标题/时间/地点/碎碎念 -->
+        <div class="moment-card">
+            <div class="card-img-box">
+                <img src="./images/moment_3.jpg" alt="照相纪念">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">照相纪念</h3>
+                <div class="card-desc">
+                    <span>时间：2025.08.08</span>
+                    <span>地点：咖啡厅</span>
+                    <span>碎碎念：超好看的照片～</span>
+                </div>
+            </div>
+        </div>
+
+       <!-- 卡片4：改标题/时间/地点/碎碎念 -->
+        <div class="moment-card">
+            <div class="card-img-box">
+                <img src="./images/moment_4.jpg" alt="照相纪念">
+            </div>
+            <div class="card-content">
+                <h3 class="card-title">照相纪念</h3>
+                <div class="card-desc">
+                    <span>时间：2025.08.08</span>
+                    <span>地点：咖啡厅</span>
+                    <span>碎碎念：超好看的照片～</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
