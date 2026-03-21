@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're my everything - MY LOVE LMT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: '微软雅黑', Arial, sans-serif;
+        }
+        body {
+            background: #fef7fb;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        /* 顶部导航 */
+        .top-nav {
+            padding: 20px 50px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
+        }
+        /* 主体容器 */
+        .container {
+            width: 100%;
+            min-height: calc(100vh - 80px);
+            padding: 50px;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        /* 左侧区域：文字 + 按钮（核心修改） */
+        .left-area {
+            flex: 1;
+            z-index: 5; /* 层级高于图片，不被挡 */
+            display: flex;
+            flex-direction: column; /* 文字在上，按钮在下 */
+            justify-content: center;
+        }
+        /* 左侧文字 */
+        .left-text {
+            margin-bottom: 40px; /* 文字和按钮的间距 */
+        }
+        .big-text {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: bold;
+            color: #7472FE;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .lmt-text {
+            font-size: clamp(3.5rem, 9vw, 7.5rem);
+            font-weight: bold;
+            color: #4A4AC7;
+            line-height: 1;
+        }
+        /* 按钮组：文字下方，横向并排 */
+        .btn-group {
+            display: flex;
+            gap: 25px; /* 按钮间距 */
+            align-items: center;
+        }
+        .btn {
+            width: 220px;
+            padding: 18px 25px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left; /* 按钮文字靠左，更协调 */
+        }
+        .btn:hover {
+            background: linear-gradient(135deg, #7472FE 0%, #9D65C9 100%);
+            color: #fff;
+            transform: translateY(-5px);
+        }
+        .btn small {
+            font-size: 12px;
+            color: #999;
+            display: block;
+            margin-bottom: 5px;
+            letter-spacing: 0.1em;
+        }
+        .btn h3 {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .btn:hover small {
+            color: #fff;
+        }
+        /* 右侧图片：原位置（中间偏右）+ 放大尺寸，无改动 */
+        .right-img-box {
+            position: absolute;
+            right: 80px; /* 原位置，不改动 */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 4;
+        }
+        .main-img {
+            width: clamp(450px, 42vw, 550px); /* 放大尺寸，不改动 */
+            height: auto;
+            border-radius: 24px;
+            border: 10px solid #fff;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            animation: float 8s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%,100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        /* 响应式适配 */
+        @media (max-width: 1200px) {
+            .main-img {
+                width: clamp(380px, 40vw, 500px);
+            }
+            .right-img-box {
+                right: 50px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 30px 20px;
+            }
+            .left-area {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+            .btn-group {
+                justify-content: center;
+                width: 100%;
+            }
+            .btn {
+                text-align: center;
+            }
+            .right-img-box {
+                position: static;
+                transform: none;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+            .main-img {
+                width: clamp(280px, 80vw, 400px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部导航 -->
+    <div class="top-nav">
+        <h2>MY LOVE LMT - You're my everything</h2>
+    </div>
+
+    <!-- 主体内容 -->
+    <div class="container">
+        <!-- 左侧：文字 + 按钮（核心修改） -->
+        <div class="left-area">
+            <div class="left-text">
+                <div class="big-text">You're my everything</div>
+                <div class="lmt-text">LMT</div>
+            </div>
+            <!-- 按钮组：文字下方，横向并排 -->
+            <div class="btn-group">
+                <div class="btn" onclick="location.href='moment.html'">
+                    <small>SWEET MOMENT</small>
+                    <h3>甜蜜时刻</h3>
+                </div>
+                <div class="btn" onclick="location.href='memory.html'">
+                    <small>LOVE MEMORY</small>
+                    <h3>纪念回忆</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧图片：位置/尺寸完全不变 -->
+        <div class="right-img-box">
+            <img src="./images/main.jpg" alt="纪念图片" class="main-img">
+        </div>
+    </div>
+</body>
+</html>
